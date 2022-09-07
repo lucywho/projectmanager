@@ -34,7 +34,7 @@ export default function Subscribe() {
                 </p>
 
                 <button
-                    className="mt-10 bg-red-800 text-yellow-50 border border-red-800 hover:bg-yellow-50 hover:text-red-800 px-5 py-2"
+                    className="mt-10 bg-red-700 text-yellow-50 border border-red-700 hover:bg-yellow-50 hover:text-red-700 px-5 py-2"
                     onClick={async () => {
                         const res = await fetch("/api/stripe/session", {
                             method: "POST",

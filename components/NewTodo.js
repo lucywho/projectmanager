@@ -25,10 +25,11 @@ export default function NewTodo({ project_id }) {
         >
             <input
                 onChange={(e) => setName(e.target.value)}
-                className="border p-1 font-black outline-none bg-yellow-50 border-red-800"
+                className="border p-1 font-black outline-none bg-yellow-50 border-red-700"
                 required
                 placeholder="new todo"
             />
+
             <button
                 disabled={name ? false : true}
                 className={`border px-4 py-2 ml-2 font-bold text-xs uppercase ${

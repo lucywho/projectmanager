@@ -20,7 +20,7 @@ export default function Home() {
 
     return (
         <div className="text-center ">
-            <p className="mt-10 text-xl text-red-800">
+            <p className="mt-10 text-xl text-red-700">
                 The best way to manage your projects!
             </p>
 
@@ -29,7 +29,7 @@ export default function Home() {
             <div className="mt-10">
                 <a
                     href="/api/auth/signin"
-                    className="bg-red-800 text-yellow-50 border-2 border-red-800 hover:bg-yellow-50 hover:text-red-900 px-5 py-2"
+                    className="bg-red-700 text-yellow-50 border-2 border-red-700 hover:bg-yellow-50 hover:text-red-700 px-5 py-2"
                 >
                     Log in
                 </a>
