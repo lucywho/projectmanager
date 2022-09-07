@@ -5,6 +5,7 @@ import { useSession, getSession } from "next-auth/react"
 import prisma from "lib/prisma"
 import { getProjects } from "lib/data"
 import Loading from "components/Loading"
+import NewTodo from "components/NewTodo"
 
 export default function Dashboard({ projects }) {
     const router = useRouter()
@@ -31,7 +32,7 @@ export default function Dashboard({ projects }) {
     return (
         <div className="text-center ">
             <form
-                className="mt-10 flex flex-row justify-center"
+                className="mt-10 flex flex-row justify-center "
                 onSubmit={async (e) => {
                     e.preventDefault()
                     await fetch("/api/project", {
@@ -54,7 +55,7 @@ export default function Dashboard({ projects }) {
                 />
                 <button
                     disabled={name ? false : true}
-                    className={`border px-8 py-2 ml-2 font-bold ${
+                    className={`border px-8 py-2 ml-2 font-bold text-sm uppercase ${
                         name
                             ? "text-emerald-800 border-emerald-800 hover:text-yellow-50 hover:bg-emerald-800"
                             : "cursor-not-allowed text-gray-400 border-gray-400"
@@ -63,15 +64,20 @@ export default function Dashboard({ projects }) {
                     Add
                 </button>
             </form>
-            <div className="grid sm:grid-cols-2">
-                {projects.map((project, index) => (
-                    <div key={index}>
-                        <h2 className="mt-10 font-bold">{project.name}</h2>
-
-                        <ol className="mt-4 list-inside list-decimal">
-                            <li>TODO 1</li>
-                            <li>TODO 2</li>
-                            <li>TODO 3</li>
+            <div className="grid sm:grid-cols-2 text-left ml-16">
+                {projects.map((project, project_index) => (
+                    <div key={project_index}>
+                        <h2 className="mt-10 font-bold text-emerald-800  ">
+                            {project.name}
+                        </h2>
+                        <NewTodo project_id={project.id} />
+                        <ol className="mt-4 list-inside text-left ">
+                            {project.todos.map((todo, todo_index) => (
+                                <li key={todo_index}>
+                                    <span>()</span>
+                                    {""} {todo.name}
+                                </li>
+                            ))}
                         </ol>
                     </div>
                 ))}
