@@ -8,7 +8,9 @@ export default function Header() {
                 <meta name="description" content="project manager" />
                 <link rel="icon" href="/bookmark.ico" />
             </Head>
-            <header> Project Manager Header</header>
+            <header className=" font-extrabold text-3xl py-2 bg-red-800 text-yellow-50 text-center">
+                Project Manager
+            </header>
         </>
     )
 }
