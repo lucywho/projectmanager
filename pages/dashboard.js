@@ -49,15 +49,15 @@ export default function Dashboard({ projects }) {
             >
                 <input
                     onChange={(e) => setName(e.target.value)}
-                    className="border p-1 font-black outline-none bg-yellow-50 border-red-800"
+                    className="border-2 p-1 font-black outline-none bg-yellow-50 border-red-700"
                     required
                     placeholder="new project name"
                 />
                 <button
                     disabled={name ? false : true}
-                    className={`border px-8 py-2 ml-2 font-bold text-sm uppercase ${
+                    className={`border-2 px-8 py-2 ml-2 font-bold text-sm uppercase ${
                         name
-                            ? "text-emerald-800 border-emerald-800 hover:text-yellow-50 hover:bg-emerald-800"
+                            ? "text-emerald-800 border-emerald-800  hover:text-yellow-50 hover:bg-emerald-800"
                             : "cursor-not-allowed text-gray-400 border-gray-400"
                     }`}
                 >
@@ -74,8 +74,32 @@ export default function Dashboard({ projects }) {
                         <ol className="mt-4 list-inside text-left ">
                             {project.todos.map((todo, todo_index) => (
                                 <li key={todo_index}>
-                                    <span>()</span>
-                                    {""} {todo.name}
+                                    <span
+                                        className="cursor-pointer"
+                                        onClick={async (e) => {
+                                            e.preventDefault()
+                                            await fetch("/api/complete", {
+                                                body: JSON.stringify({
+                                                    id: todo.id,
+                                                }),
+                                                headers: {
+                                                    "Content-Type":
+                                                        "application/json",
+                                                },
+                                                method: "POST",
+                                            })
+                                            router.reload()
+                                        }}
+                                    >
+                                        {todo.done ? "✅" : "🟥"}
+                                    </span>
+                                    <span
+                                        className={`${
+                                            todo.done ? "line-through" : ""
+                                        }`}
+                                    >
+                                        {""} {todo.name}
+                                    </span>
                                 </li>
                             ))}
                         </ol>
