@@ -114,10 +114,31 @@ export default function Dashboard({ projects }) {
                                     </span>
                                     <span
                                         className={`${
-                                            todo.done ? "line-through" : ""
+                                            todo.done
+                                                ? "line-through ml-2"
+                                                : "ml-2"
                                         }`}
                                     >
                                         {""} {todo.name}
+                                    </span>
+                                    <span
+                                        className="cursor-pointer ml-4 noline"
+                                        onClick={async (e) => {
+                                            e.preventDefault()
+                                            await fetch("/api/todo", {
+                                                body: JSON.stringify({
+                                                    id: todo.id,
+                                                }),
+                                                headers: {
+                                                    "Content-Type":
+                                                        "application/json",
+                                                },
+                                                method: "DELETE",
+                                            })
+                                            router.reload()
+                                        }}
+                                    >
+                                        🗑
                                     </span>
                                 </li>
                             ))}
