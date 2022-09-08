@@ -19,7 +19,7 @@ export default async function handler(req, res) {
 
     await prisma.todo.update({
         data: {
-            done: true,
+            done: false,
         },
         where: {
             id: req.body.id,

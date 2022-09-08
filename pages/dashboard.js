@@ -97,16 +97,22 @@ export default function Dashboard({ projects }) {
                                         className="cursor-pointer"
                                         onClick={async (e) => {
                                             e.preventDefault()
-                                            await fetch("/api/complete", {
-                                                body: JSON.stringify({
-                                                    id: todo.id,
-                                                }),
-                                                headers: {
-                                                    "Content-Type":
-                                                        "application/json",
-                                                },
-                                                method: "POST",
-                                            })
+
+                                            await fetch(
+                                                !todo.done
+                                                    ? "/api/complete"
+                                                    : "/api/uncomplete",
+                                                {
+                                                    body: JSON.stringify({
+                                                        id: todo.id,
+                                                    }),
+                                                    headers: {
+                                                        "Content-Type":
+                                                            "application/json",
+                                                    },
+                                                    method: "POST",
+                                                }
+                                            )
                                             router.reload()
                                         }}
                                     >
