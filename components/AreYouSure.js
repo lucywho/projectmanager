@@ -10,7 +10,6 @@ export default function AreYouSure({ project, setSureDisplay }) {
                 className="cursor-pointer ml-4 px-2 border border-red-700 hover:bg-emerald-700 hover:border-emerald-900 hover:text-yellow-50"
                 onClick={(e) => {
                     e.preventDefault()
-                    // router.reload()
                     setSureDisplay(false)
                     return
                 }}
@@ -31,6 +30,7 @@ export default function AreYouSure({ project, setSureDisplay }) {
                         method: "DELETE",
                     })
 
+                    setSureDisplay(false)
                     router.reload()
                 }}
             >

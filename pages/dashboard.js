@@ -12,6 +12,7 @@ export default function Dashboard({ projects }) {
     const router = useRouter()
     const [name, setName] = useState("")
     const [sureDisplay, setSureDisplay] = useState(false)
+    const [onlyThis, setOnlyThis] = useState("")
 
     const { data: session, status } = useSession()
 
@@ -76,23 +77,12 @@ export default function Dashboard({ projects }) {
                                 onClick={async (e) => {
                                     e.preventDefault()
                                     setSureDisplay(true)
-
-                                    // await fetch("/api/project", {
-                                    //     body: JSON.stringify({
-                                    //         id: project.id,
-                                    //     }),
-                                    //     headers: {
-                                    //         "Content-Type": "application/json",
-                                    //     },
-                                    //     method: "DELETE",
-                                    // })
-
-                                    // router.reload()
+                                    setOnlyThis(project.id)
                                 }}
                             >
                                 🚮
                             </span>
-                            {sureDisplay && (
+                            {sureDisplay && onlyThis == project.id && (
                                 <AreYouSure
                                     project={project}
                                     setSureDisplay={setSureDisplay}
