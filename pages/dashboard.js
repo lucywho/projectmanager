@@ -99,9 +99,9 @@ export default function Dashboard({ projects }) {
                                             e.preventDefault()
 
                                             await fetch(
-                                                !todo.done
-                                                    ? "/api/complete"
-                                                    : "/api/uncomplete",
+                                                todo.done
+                                                    ? `/api/complete?done=${true}`
+                                                    : `/api/complete?done=${false}`,
                                                 {
                                                     body: JSON.stringify({
                                                         id: todo.id,
