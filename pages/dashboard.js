@@ -6,10 +6,12 @@ import prisma from "lib/prisma"
 import { getProjects } from "lib/data"
 import Loading from "components/Loading"
 import NewTodo from "components/NewTodo"
+import AreYouSure from "components/AreYouSure"
 
 export default function Dashboard({ projects }) {
     const router = useRouter()
     const [name, setName] = useState("")
+    const [sureDisplay, setSureDisplay] = useState(false)
 
     const { data: session, status } = useSession()
 
@@ -73,21 +75,29 @@ export default function Dashboard({ projects }) {
                                 className="cursor-pointer ml-4"
                                 onClick={async (e) => {
                                     e.preventDefault()
-                                    await fetch("/api/project", {
-                                        body: JSON.stringify({
-                                            id: project.id,
-                                        }),
-                                        headers: {
-                                            "Content-Type": "application/json",
-                                        },
-                                        method: "DELETE",
-                                    })
+                                    setSureDisplay(true)
 
-                                    router.reload()
+                                    // await fetch("/api/project", {
+                                    //     body: JSON.stringify({
+                                    //         id: project.id,
+                                    //     }),
+                                    //     headers: {
+                                    //         "Content-Type": "application/json",
+                                    //     },
+                                    //     method: "DELETE",
+                                    // })
+
+                                    // router.reload()
                                 }}
                             >
                                 🚮
                             </span>
+                            {sureDisplay && (
+                                <AreYouSure
+                                    project={project}
+                                    setSureDisplay={setSureDisplay}
+                                />
+                            )}
                         </h2>
                         <NewTodo project_id={project.id} />
                         <ol className="mt-4 list-inside text-left ">
@@ -131,6 +141,7 @@ export default function Dashboard({ projects }) {
                                         className="cursor-pointer ml-4 noline"
                                         onClick={async (e) => {
                                             e.preventDefault()
+
                                             await fetch("/api/todo", {
                                                 body: JSON.stringify({
                                                     id: todo.id,
