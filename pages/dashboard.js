@@ -7,6 +7,7 @@ import { getProjects } from "lib/data"
 import Loading from "components/Loading"
 import NewTodo from "components/NewTodo"
 import AreYouSure from "components/AreYouSure"
+import AreYouSureTask from "components/AreYouSureTask"
 
 export default function Dashboard({ projects }) {
     const router = useRouter()
@@ -131,22 +132,33 @@ export default function Dashboard({ projects }) {
                                         className="cursor-pointer ml-4 noline"
                                         onClick={async (e) => {
                                             e.preventDefault()
-
-                                            await fetch("/api/todo", {
-                                                body: JSON.stringify({
-                                                    id: todo.id,
-                                                }),
-                                                headers: {
-                                                    "Content-Type":
-                                                        "application/json",
-                                                },
-                                                method: "DELETE",
-                                            })
-                                            router.reload()
+                                            setSureDisplay(true)
+                                            setOnlyThis(todo.id)
                                         }}
+                                        // onClick={async (e) => {
+                                        //     e.preventDefault()
+
+                                        //     await fetch("/api/todo", {
+                                        //         body: JSON.stringify({
+                                        //             id: todo.id,
+                                        //         }),
+                                        //         headers: {
+                                        //             "Content-Type":
+                                        //                 "application/json",
+                                        //         },
+                                        //         method: "DELETE",
+                                        //     })
+                                        //     router.reload()
+                                        // }}
                                     >
                                         🗑
                                     </span>
+                                    {sureDisplay && onlyThis == todo.id && (
+                                        <AreYouSureTask
+                                            todo={todo}
+                                            setSureDisplay={setSureDisplay}
+                                        />
+                                    )}
                                 </li>
                             ))}
                         </ol>
