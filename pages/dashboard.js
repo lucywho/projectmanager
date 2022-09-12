@@ -4,9 +4,11 @@ import { useSession, getSession } from "next-auth/react"
 
 import prisma from "lib/prisma"
 import { getProjects } from "lib/data"
+
 import Loading from "components/Loading"
 import NewTodo from "components/NewTodo"
 import AreYouSure from "components/AreYouSure"
+import AreYouSureSub from "components/AreYouSureSub"
 import AreYouSureTask from "components/AreYouSureTask"
 
 export default function Dashboard({ projects }) {
@@ -135,21 +137,6 @@ export default function Dashboard({ projects }) {
                                             setSureDisplay(true)
                                             setOnlyThis(todo.id)
                                         }}
-                                        // onClick={async (e) => {
-                                        //     e.preventDefault()
-
-                                        //     await fetch("/api/todo", {
-                                        //         body: JSON.stringify({
-                                        //             id: todo.id,
-                                        //         }),
-                                        //         headers: {
-                                        //             "Content-Type":
-                                        //                 "application/json",
-                                        //         },
-                                        //         method: "DELETE",
-                                        //     })
-                                        //     router.reload()
-                                        // }}
                                     >
                                         🗑
                                     </span>
@@ -165,6 +152,19 @@ export default function Dashboard({ projects }) {
                     </div>
                 ))}
             </div>
+            <p
+                className="text-center text-xs mt-20 hover:underline cursor-pointer hover:text-red-700"
+                onClick={async (e) => {
+                    e.preventDefault()
+                    setSureDisplay(true)
+                    setOnlyThis("sub")
+                }}
+            >
+                cancel your subscription
+            </p>
+            {sureDisplay && onlyThis == "sub" && (
+                <AreYouSureSub setSureDisplay={setSureDisplay} />
+            )}
         </div>
     )
 }
