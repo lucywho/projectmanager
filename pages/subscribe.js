@@ -29,8 +29,9 @@ export default function Subscribe() {
         <>
             <Script src="https://js.stripe.com/v3/" />
             <div className="text-center ">
-                <p className="mt-10">
-                    Join for just $19.99/m. Free trial for the first 7 days
+                <p className="mt-10">Join for just €19.99 per month. </p>
+                <p className="text-emerald-800 mt-2 font-bold">
+                    Try FREE for 7 days
                 </p>
 
                 <button

@@ -70,7 +70,7 @@ export default function Dashboard({ projects }) {
                     Add
                 </button>
             </form>
-            <div className="grid sm:grid-cols-2 text-left ml-16">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 text-left ml-16">
                 {projects.map((project, project_index) => (
                     <div key={project_index}>
                         <h2 className="mt-10 font-bold text-emerald-800">
@@ -153,7 +153,8 @@ export default function Dashboard({ projects }) {
                 ))}
             </div>
             <p
-                className="text-center text-xs mt-20 hover:underline cursor-pointer hover:text-red-700"
+                className="text-center text-xs mt-40
+                 hover:underline cursor-pointer hover:text-red-700"
                 onClick={async (e) => {
                     e.preventDefault()
                     setSureDisplay(true)
