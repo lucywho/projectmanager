@@ -21,4 +21,4 @@ Built in Next.js with:
 -   styling
 -   confirmation step for delete and unsubscribe actions
 
-![image](public/assets/PM-dashboard.png)
+![image](public/PM-dashboard.png)
